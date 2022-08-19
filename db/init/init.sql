@@ -1,0 +1,4 @@
+CREATE USER aninda;
+
+CREATE DATABASE lbgraphql;
+GRANT ALL PRIVILEGES ON DATABASE lbgraphql TO aninda;
