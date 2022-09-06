@@ -1,6 +1,5 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-// import { ApolloServer } from 'apollo-server';
 import { ApolloGateway, IntrospectAndCompose } from '@apollo/gateway';
 import dotenv from 'dotenv';
 
@@ -15,14 +14,17 @@ dotenv.config();
     const gateway = new ApolloGateway({
       supergraphSdl: new IntrospectAndCompose({
         subgraphs: [{
-          name: 'genre-service',
-          url: 'http://localhost:4001/graphql'
-        }]
-      })
+          name: 'genre-service', 
+          url: 'http://genre-service:4001/graphql'
+        }],
+      }),
+      debug: nodeEnv === 'development',
+      pollIntervalInMs: 10000
     });
 
-    const server = new ApolloServer({ gateway });
-    await server.start();
+    const graphServer = new ApolloServer({ gateway });
+    await graphServer.start();
+    graphServer.applyMiddleware({ app, path: '/graphql' });
     app.listen(port, () => console.log(`Gateway server started on port ${port}`));
   } catch (e) {
     console.error(e);
