@@ -18,7 +18,7 @@ dotenv.config();
           url: 'http://genre-service:4001/graphql'
         }],
       }),
-      debug: nodeEnv === 'development',
+      debug: nodeEnv === 'development', 
       pollIntervalInMs: 10000
     });
 
