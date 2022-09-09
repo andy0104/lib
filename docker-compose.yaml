@@ -31,6 +31,41 @@ services:
     depends_on:
       - postgres
 
+  genre-service:
+    depends_on:
+      - postgres
+      - pgadmin
+    image: genre-service
+    build:
+      context: ./genre-service/
+      dockerfile: Dockerfile.dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - 4001:4001
+    volumes:
+      - /usr/src/app/node_modules
+      - ./genre-service:/usr/src/app
+    restart: on-failure:10
+
+  gateway-service:
+    depends_on:
+      - postgres
+      - pgadmin
+      - genre-service
+    image: gateway-service
+    build:
+      context: ./gateway-service/
+      dockerfile: Dockerfile.dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - 4000:4000
+    volumes:
+      - /usr/src/app/node_modules
+      - ./gateway-service:/usr/src/app
+    restart: on-failure:10
+
 volumes:
   postgresgraphql:
   pgadmingraphql:
