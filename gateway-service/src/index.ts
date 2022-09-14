@@ -14,7 +14,7 @@ dotenv.config();
     const gateway = new ApolloGateway({
       supergraphSdl: new IntrospectAndCompose({
         subgraphs: [{
-          name: 'genre-service', 
+          name: 'genre-service',
           url: 'http://genre-service:4001/graphql'
         }],
       }),
