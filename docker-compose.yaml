@@ -66,6 +66,13 @@ services:
       - ./gateway-service:/usr/src/app
     restart: on-failure:10
 
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
 volumes:
   postgresgraphql:
   pgadmingraphql:
