@@ -1,6 +1,6 @@
 import { IResolvers } from '@graphql-tools/utils';
 import GenreServices from '../../services/genre.services';
-import { GenreInputs, GenreResultError } from '../../utilities/types/genre.types';
+import { GenreInputs, GenreFilter, GenreResultError } from '../../utilities/types/genre.types';
 
 export const genreResolvers: IResolvers = {
   CreateGenreResult: {
@@ -17,6 +17,12 @@ export const genreResolvers: IResolvers = {
     async getGenres(_: void, args: void) {
       const genreServ = new GenreServices();
       return genreServ.getGenres();
+    },
+    async getGenre(_: void, args: GenreFilter) {
+      console.log('Get genre input...');
+      console.log(args);
+      const genreServ = new GenreServices();
+      return await genreServ.getGenre(args);
     }
   },
   Mutation: {

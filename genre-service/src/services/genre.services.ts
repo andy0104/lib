@@ -1,6 +1,6 @@
 import Genre from '../models/Genre.model';
 import GenreOperations from '../helpers/Genre.operations';
-import { GenreInputs, GenreResultError } from '../utilities/types/genre.types';
+import { GenreInputs, GenreFilter, GenreResultError } from '../utilities/types/genre.types';
 
 class GenreServices {
   private operations;
@@ -10,6 +10,11 @@ class GenreServices {
 
   public async getGenres() {
     return this.operations.genreFilter({});
+  }
+
+  public async getGenre(genreInput: GenreFilter) {
+    const result = await this.operations.genreFilter(genreInput);
+    return (result && result.length > 0) ? result[0] : null;
   }
 
   public async createGenre(args: GenreInputs) {
@@ -22,8 +27,6 @@ class GenreServices {
 
     // Check if the genre is already created
     const addedgenres = await this.operations.genreFilter(args);
-    console.log('Genre is already added...');
-    console.log(addedgenres);
 
     if (addedgenres.length > 0) {
       genreResultError.code = 409;
