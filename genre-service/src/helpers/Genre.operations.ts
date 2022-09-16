@@ -48,6 +48,10 @@ class GenreOperations<M extends Model> {
       whereQuery.genreName = Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('genreName')), 'like', filterOptions.name.toLowerCase());
     }
 
+    if (filterOptions.genId) {
+      whereQuery.genreId = filterOptions.genId;
+    }
+
     return this.getAllGenres(whereQuery);
   }
 }
