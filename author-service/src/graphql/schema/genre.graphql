@@ -1,0 +1,26 @@
+extend type Query {
+  getGenres: [Genre!]
+  getGenre(genId: String!): Genre
+}
+
+extend type Mutation {
+  createGenre(genreInput: CreateGenreInputs): CreateGenreResult
+}
+
+input CreateGenreInputs {
+  name: String!
+  status: Boolean!
+}
+
+type GenreNotAvailable {
+  code: Int!
+  message: String!
+}
+
+union CreateGenreResult = Genre | GenreNotAvailable
+
+type Genre @key(fields: "genreId") {
+  genreId: ID!
+  genreName: String!
+  genreStatus: Boolean!
+}
