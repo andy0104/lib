@@ -46,7 +46,24 @@ services:
     volumes:
       - /usr/src/app/node_modules
       - ./genre-service:/usr/src/app
-    restart: on-failure:10
+    restart: always
+
+  author-service:
+    depends_on:
+      - postgres
+      - pgadmin
+    image: author-service
+    build:
+      context: ./author-service/
+      dockerfile: Dockerfile.dev
+    environment:
+      NODE_ENV: development
+    ports:
+      - 4002:4002
+    volumes:
+      - /usr/src/app/node_modules
+      - ./author-service:/usr/src/app
+    restart: always
 
   gateway-service:
     depends_on:
@@ -64,7 +81,7 @@ services:
     volumes:
       - /usr/src/app/node_modules
       - ./gateway-service:/usr/src/app
-    restart: on-failure:10
+    restart: always
 
   nginx:
     restart: always
@@ -73,6 +90,7 @@ services:
       context: ./nginx
     ports:
       - '3050:80'
+
 volumes:
   postgresgraphql:
   pgadmingraphql:
