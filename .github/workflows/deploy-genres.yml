@@ -11,9 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
-      - uses: actions/checkot@v2
+        uses: actions/checkot@v2
       
       - name: Build & Tag Image
+        id: build-image
       - run: cd genre-service && docker build -t anindakar0104/lib-genre .  
     
   
