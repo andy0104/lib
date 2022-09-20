@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
-        uses: actions/checkot@v3
+        uses: actions/checkout@v3
       
       - name: Build & Tag Image
         id: build-image
