@@ -1,0 +1,19 @@
+name: Deploy Genre Service
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - genre-service/**
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+      - uses: actions/checkot@v2
+      
+      - name: Build & Tag Image
+      - run: cd genre-service && docker build -t anindakar0104/lib-genre .  
+    
+  
