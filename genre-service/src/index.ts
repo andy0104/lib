@@ -19,7 +19,7 @@ dotenv.config();
     path: '/graphql'
   });
   app.listen(port, () => {
-    console.log(`Graphql server has started on express server!!!`);
+    console.log(`Graphql server has started on express server on PORT 4001!!!`);
     console.log(`Genre service started on port ${port}`);
   });
 })();
